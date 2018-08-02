@@ -1,0 +1,18 @@
+
+.monthHeader  { 
+    display: block;
+    background-color: black;
+    color: wheat;
+    font-size: 30px;
+  }
+
+  .table  { 
+    margin: 0 auto; 
+    width: 100%;
+
+  }
+
+  .table th { 
+      border: 1px solid black;
+      padding: 1rem 1.25rem
+  }

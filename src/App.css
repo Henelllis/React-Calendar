@@ -23,38 +23,3 @@
 }
 
 
-
-.calendar-month-header  { 
-  display: block;
-  background-color: black;
-  color: wheat;
-  font-size: 30px;
-}
-
-.calendar-table  { 
-    margin: 0 auto; 
-    width: 100%;
-
-  }
-
-  .calendar-table th { 
-      border: 1px solid black;
-      padding: 1rem 1.25rem
-  }
-
-
-/* @mixin calendar_day_fields($height, $width)
-{
-  width: $width;
-  min-width: $width;
-  max-width: $width;
-  height: $height;
-  text-align: center;
-  .light_link {
-    color: #787878;
-  }
-  .dark_link {
-    color: black;
-    font-weight: 900;
-  }
-} */
