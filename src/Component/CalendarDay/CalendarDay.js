@@ -18,7 +18,10 @@ const calendarDay = (props) => {
     return(
         <td className={styles.calendarDay}> 
         <div className={styles.dayNumber}>{props.dayNum}</div>
-        <button className={styles.exitButton}>  + </button>
+        <button 
+            className={styles.exitButton}
+            onClick={() => props.addReminder(props.dayNum)}
+        >  + </button>
         <ul className={styles.reminderList}>
             {listItems}
         </ul>

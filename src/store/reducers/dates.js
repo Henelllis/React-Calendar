@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const intialState= {
+    currentIndex: 0,
      daysOfTheMonth : [
         // { index: 0, date: '2018-08-01', reminders: [] },
         { index: 0, date: '2018-08-02', reminders: [] },
@@ -38,10 +39,10 @@ const intialState= {
        ]
 } 
 
-const addReminder = ( state ,action) =>{
+const addReminder = ( state ,action) => {
     return {
         ...state,
-        index: action.payload.index,
+        currentIndex: action.payload.index,
         reminder: action.payload.reminder
     }
 }
@@ -49,8 +50,15 @@ const addReminder = ( state ,action) =>{
 const removeReminder =( state ,action) => {
     return {
         ...state,
-        index: action.payload.index,
+        currentIndex: action.payload.index,
         reminder: action.payload.reminder
+    }
+}
+
+const setCurrentIndex = (state ,action) => {
+    return {
+        ...state,
+        currentIndex: action.payload.index
     }
 }
 
@@ -58,6 +66,7 @@ const reducer = (state=intialState, action) => {
     switch(action.type){
         case actionTypes.ADD_REMINDER: return addReminder(state, action);
         case actionTypes.REMOVE_REMINDER: return removeReminder(state, action);
+        case actionTypes.SET_CURRENT_INDEX: return setCurrentIndex(state, action);
         default: return state;
     }
 }
