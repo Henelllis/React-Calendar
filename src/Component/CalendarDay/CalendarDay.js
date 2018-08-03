@@ -9,7 +9,7 @@ const calendarDay = (props) => {
          listItems = (
             props.reminders.map( reminder => {
                 return (
-                    <li > reminder </li>
+                    <li key={reminder} > reminder </li>
                 )
             })
         )
