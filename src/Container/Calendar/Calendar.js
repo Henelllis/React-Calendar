@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+
 
 import CalenderHeader from '../../Component/CalendarHeader/CalenderHeader';
+import CalendarDay from '../../Component/CalendarDay/CalendarDay';
+import UnUsedCalendarDay from '../../Component/UnUsedCalendarDay/UnUsedCalendarDay';
 import styles from './Calendar.css';
 
 
@@ -10,6 +14,7 @@ class Calendar extends Component {
 
     }
 
+
     render () {
         return (
             <div>
@@ -17,63 +22,26 @@ class Calendar extends Component {
             <table className={styles.table}>
                 <CalenderHeader/>
             <tr>
-                <td  className={styles.unUsedDay}> </td>
-                <td  className={styles.unUsedDay}> </td>
-                <td className={styles.calendarDay}> 
-                    <div className={styles.dayNumber}>1</div>
-                    <button className={styles.exitButton}>  + </button>
-                    <ul className={styles.reminderList}>
-                        <li>12:15 AM</li>
-                        <li>1:15 AM</li>
-                        <li>2:15 AM</li>
-                        <li>3:15 AM</li>
-                    </ul>
-                 </td>
-                 <td className={styles.calendarDay}> 
-                    <div className={styles.dayNumber}>2</div>
-                    <button className={styles.exitButton}>  + </button>
-                    <ul className={styles.reminderList}>
-                        <li>12:15 AM</li>
-                        <li>1:15 AM</li>
-                        <li>2:15 AM</li>
-                        <li>3:15 AM</li>
-                    </ul>
-                 </td>
-                 <td className={styles.calendarDay}> 
-                    <div className={styles.dayNumber}>3</div>
-                    <button className={styles.exitButton}>  + </button>
-                    <ul className={styles.reminderList}>
-                        <li>12:15 AM</li>
-                        <li>1:15 AM</li>
-                        <li>2:15 AM</li>
-                        <li>3:15 AM</li>
-                    </ul>
-                 </td>
-                 <td className={styles.calendarDay}> 
-                    <div className={styles.dayNumber}>4</div>
-                    <button className={styles.exitButton}>  + </button>
-                    <ul className={styles.reminderList}>
-                        <li>12:15 AM</li>
-                        <li>1:15 AM</li>
-                        <li>2:15 AM</li>
-                        <li>3:15 AM</li>
-                    </ul>
-                 </td>
-                 <td className={styles.calendarDay}> 
-                    <div className={styles.dayNumber}>6</div>
-                    <button className={styles.exitButton}>  + </button>
-                    <ul className={styles.reminderList}>
-                        <li>12:15 AM</li>
-                        <li>1:15 AM</li>
-                        <li>2:15 AM</li>
-                        <li>3:15 AM</li>
-                    </ul>
-                 </td>
+                <UnUsedCalendarDay/>
+                <UnUsedCalendarDay/>
+                <CalendarDay dayNum={1} reminders={['12:13 AM','4:20 PM']}/>
+                <CalendarDay dayNum={2} />
+                {/* <CalendarDay dayNum={3}/>
+                <CalendarDay dayNum={4}/>
+                <CalendarDay/> */}
             </tr>
+
             </table>
             </div>
         )
     }
 }
 
-export default Calendar;
+
+const mapStateToProps = state => {
+    return{
+        days: state.daysOfTheMonth,
+    }
+}
+
+export default connect(mapStateToProps)(Calendar);

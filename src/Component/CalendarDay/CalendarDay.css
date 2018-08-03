@@ -1,0 +1,67 @@
+.calendarDay { 
+    border: 1px solid black;
+    display: table-cell;
+    padding: 4rem;
+    width: 14.25743545%;
+
+    background-color:lightblue;
+    height:100%;
+    position: relative;
+}
+
+.dayNumber {
+
+    position: absolute;
+    font-size: 2.5rem;
+    /* height: 100%;
+    width: 100%; */
+    top: 0;
+    left: 0;
+    background: lightblue;
+}
+
+
+
+.reminderList{
+    list-style-type: none;
+    overflow-y: scroll;
+    height: 4rem;
+    text-align: left;
+    padding-left: 0;
+    padding-bottom: 0;
+}
+
+
+.reminderList li{
+    display: block;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    background-color: purple;
+    
+}
+
+.reminderList li:hover{
+    background-color: red;
+}
+
+.reminderList li:not(:last-child){
+    margin-bottom: 1rem;
+}
+
+
+.exitButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: lightblue;
+    border:none;
+    font-size: 2.5rem;
+    color: black;
+}
+
+
+.exitButton:hover {
+
+    color: pink;
+}

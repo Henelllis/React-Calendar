@@ -1,0 +1,10 @@
+.unUsedDay {
+
+    border: 1px solid black;
+    display: table-cell;
+    padding: 4rem;
+    background-color:grey;
+    width: 14.25743545%;
+    height:100%;
+    position: relative;
+}
