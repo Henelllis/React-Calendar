@@ -13,6 +13,18 @@
     transition: all 0.3s ease-out;
 }
 
+
+.formStyle {
+    display: block;
+}
+
+
+.formInput {
+    display: block;
+    margin: 0 auto;
+}
+
+
 @media (min-width: 600px) {
     .NewReminderForm {
         width: 500px;
