@@ -11,18 +11,44 @@ class NewReminderForm extends Component{
     state = {
         time: null,
         reminderText: null,
-        reminderTime: null
+        reminderTime: null,
+        formErrors: {reminderText: '', reminderTime: ''},
+        reminderTextValid: false,
+        reminderTimeValid: false,
+        formValid: false
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return (nextProps.show !== this.props.show || nextProps.children !== this.props.children)
-
-    }
 
     onReminderTextChange = (event) => {
         console.log(event.target.value);
-         
-        this.setState({reminderText: event.target.value})
+         let name  = event.target.name;
+         let value = event.target.value;
+        console.log('name : ', name , ' value: ' , value);
+        this.setState({reminderText: event.target.value},
+                        () => {this.validateField(name ,value )})
+    }
+
+    validateField(fieldName  ,value){
+        let reminderTextValid = this.state.reminderTextValid;
+        let reminderTimeValid = this.state.reminderTimeValid;
+
+        switch(fieldName) {
+            case 'reminderText':
+                reminderTextValid = value.length > 0 && value.length <= 30;
+                break;
+            default:
+                break;
+        }
+
+        this.setState({
+            reminderTextValid: reminderTextValid,
+            reminderTimeValid: reminderTimeValid
+        }, this.validateForm);
+      
+    }
+
+    validateForm () {
+        this.setState({formValid: this.state.reminderTextValid && true /*TODO: REPLACE WITH TIME VALIDATION WHEN COMPLETED*/})
     }
 
     onSubmitHandler = (event ) => {
@@ -31,7 +57,8 @@ class NewReminderForm extends Component{
         event.target.reset();
         
         this.setState({reminderText: ""})
-        this.setState({reminderText: null})
+        this.setState({reminderText: null,
+                        formValid:false})
         //Invoke a function to set parent component to set show to false, at the end of course
         this.props.closeAddReminder();
     }
@@ -42,6 +69,14 @@ class NewReminderForm extends Component{
         let index = 0;
         if( this.props.workingIndex){
             index = this.props.workingIndex - 1;
+        }
+        let classesForText = styles.formInputTextBox
+        let classesForTextTotal = styles.formTotalText;
+
+
+        if(!this.state.reminderTextValid){
+            classesForText = styles.formInputTextBox + " " + styles.formInputInvalidTextBox;
+            classesForTextTotal = styles.formTotalText + " " + styles.formInvalidTotalText;
         }
         return(
            
@@ -55,16 +90,23 @@ class NewReminderForm extends Component{
                         transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
                         opacity: this.props.show ? '1' : '0',
                     }}>
-                    <p>{this.props.days[index].date}</p>
+                    <div className={styles.dateHeader}>{this.props.days[index].date}</div>
                     
                     <form className={styles.formStyle}  onSubmit={this.onSubmitHandler}>
-                        <input  className={styles.formInput}type="time" placeholder="ENTER TIME"/>
-                        {/* TODO: ADD VALIDATION OF IF CHAR > 0 AND <= 30 DO NOT NEED JSX */}
-                        <input className={styles.formInput} type="text" 
+                        <div className={styles.timeContainer}>
+                        <p> Time: </p>
+                            <input  className={styles.formInputTime}type="time" placeholder="ENTER TIME"/>
+                        </div>
+                        <input className={classesForText} type="text" 
                                                             placeholder="ENTER MESSAGE"
                                                             value={this.state.reminderText}
-                                                            onChange={this.onReminderTextChange}/>
-                        <button 
+                                                            onChange={this.onReminderTextChange}
+                                                            name={'reminderText'}
+                                                            autocomplete="false"/>
+                        <span className={classesForTextTotal}> total text: {this.state.reminderText ? this.state.reminderText.length + '/30' : '0/30'} </span>
+                        <button className={styles.formSubmitButton}
+                                type="submit" 
+                                disabled={!this.state.formValid}
                            > ADD REMINDER </button>
                     </form>
                 </div>
