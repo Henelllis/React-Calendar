@@ -40,12 +40,20 @@ const intialState= {
 } 
 
 const addReminder = ( state ,action) => {
+
+    let cloneOfState = {...state};
+    let cloneOfDays = [...cloneOfState.daysOfTheMonth];
+    cloneOfDays[action.payload.index].reminders.push(action.payload.reminder);
+
+
     return {
         ...state,
         currentIndex: action.payload.index,
-        reminder: action.payload.reminder
+        daysOfTheMonth: cloneOfDays
     }
 }
+
+
 
 const removeReminder =( state ,action) => {
     return {

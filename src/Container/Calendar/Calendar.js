@@ -40,6 +40,8 @@ class Calendar extends Component {
             )
         });
 
+
+        console.log('ERROR BOUNDARY CONDITION FOR props.day', this.props.days);
         weekDays = this.props.days.filter(day =>  day.index < 7 - this.state.firstDayOffset).map( day => {
             return (
                 <CalendarDay key={day.index} 

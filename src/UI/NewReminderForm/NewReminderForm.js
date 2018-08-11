@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import styles from './NewReminderForm.css';
 //import Aux from '../../../hoc/Auxillary';
 import Backdrop from  '../Backdrop/Backdrop';
+import * as actions from '../../store/actions/dates';
+
 
 class NewReminderForm extends Component{ 
 
     state = {
         time: null,
-        reminderText: null
+        reminderText: null,
+        reminderTime: null
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -20,16 +23,16 @@ class NewReminderForm extends Component{
         console.log(event.target.value);
          
         this.setState({reminderText: event.target.value})
-        console.log('[REMAINDER TEXT] : ', event.target.value);
     }
 
     onSubmitHandler = (event ) => {
+        this.props.addReminder(this.props.workingIndex - 1, {reminderNote: this.state.reminderText, reminderTime:this.state.reminderTime });
         event.preventDefault();
         event.target.reset();
-        console.log("YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        
         this.setState({reminderText: ""})
         this.setState({reminderText: null})
-        //Invoke a function to set parent component to set show to false, at the end of course 
+        //Invoke a function to set parent component to set show to false, at the end of course
         this.props.closeAddReminder();
     }
 
@@ -40,7 +43,6 @@ class NewReminderForm extends Component{
         if( this.props.workingIndex){
             index = this.props.workingIndex - 1;
         }
-        console.log('[REMAINDER TEXT] : ', this.state.reminderText);
         return(
            
             <Fragment>
@@ -79,4 +81,11 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(NewReminderForm);
+
+const mapDispatchToProps = dispatch => {
+    return{
+        addReminder : (index,reminder) => dispatch(actions.addReminder(index, reminder))
+    }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps)(NewReminderForm);

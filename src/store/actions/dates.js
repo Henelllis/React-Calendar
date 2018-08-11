@@ -9,3 +9,17 @@ export const setIndex = (index) => {
         }
     }
 }
+
+
+export const addReminder = (index, reminder) => {
+    console.log('[IN THE ACTION PART OF STORE FOR ADD REMINDER ]', reminder);
+    return {
+        type: actionTypes.ADD_REMINDER,
+        payload: {
+            index,
+            reminder
+        }
+    }
+}
+
+
